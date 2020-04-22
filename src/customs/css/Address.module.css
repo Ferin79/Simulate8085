@@ -1,0 +1,21 @@
+.addressWrapper {
+  width: 33.33%;
+  height: 100%;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #edf2f7;
+}
+.addressWrapper .title {
+  font-size: 30px;
+  font-weight: bold;
+}
+.addressTable {
+  min-height: 60%;
+  max-width: 95%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 10px 0;
+}

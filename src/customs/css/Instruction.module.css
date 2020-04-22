@@ -1,0 +1,26 @@
+.instructionWrapper {
+  width: 33.33%;
+  height: 100%;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #edf2f7;
+}
+.title {
+  font-size: 30px;
+  font-weight: bold;
+}
+.subtitle {
+  font-size: 20px;
+}
+.instructionDetails .subtitle {
+  font-size: 16px;
+}
+.instructionDetails ul {
+  padding-left: 50px;
+}
+.instructionDetails ul li {
+  list-style: disc;
+}
