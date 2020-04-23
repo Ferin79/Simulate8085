@@ -126,7 +126,8 @@ const ManipulateRegister = () => {
                   <div>
                     <TextInput
                       type="number"
-                      error={isErrorText ? "only 0 to 255" : null}
+                      error="Between 0 to 255 only"
+                      validate
                       max="255"
                       placeholder="Enter Value"
                       onChange={(event) => {
@@ -141,7 +142,6 @@ const ManipulateRegister = () => {
                     />
                     <Button
                       type="submit"
-                      validate
                       small
                       waves
                       style={{ margin: "20px" }}
