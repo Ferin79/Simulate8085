@@ -8,3 +8,10 @@
   align-items: center;
   padding: 10px;
 }
+@media (max-width: 900px) {
+  .manipulateWrapper {
+    flex-direction: column;
+    padding: 0px;
+    height: auto;
+  }
+}

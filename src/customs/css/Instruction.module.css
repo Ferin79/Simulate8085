@@ -24,3 +24,8 @@
 .instructionDetails ul li {
   list-style: disc;
 }
+@media (max-width: 900px) {
+  .instructionWrapper {
+    width: 100%;
+  }
+}

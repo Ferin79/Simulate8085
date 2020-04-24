@@ -28,3 +28,18 @@
   justify-content: space-evenly;
   align-items: center;
 }
+@media (max-width: 900px) {
+  .InteractWrapper {
+    height: auto;
+    margin: 0;
+  }
+  .InteractActions {
+    flex-direction: column;
+  }
+  .InteractDetails {
+    flex-direction: column;
+  }
+  .InteractButtons button {
+    margin: 10px 10px !important;
+  }
+}

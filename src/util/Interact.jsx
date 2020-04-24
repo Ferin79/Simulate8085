@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./css/Interact.module.css";
 import { Button, Icon } from "react-materialize";
+import { Context } from "../data/context";
 
 const Interact = () => {
+  const { SVGRef, rawInstruction } = useContext(Context);
+
   return (
     <div className={style.InteractWrapper}>
       <div className={style.InteractTitle}>
@@ -12,7 +15,7 @@ const Interact = () => {
         </p>
         <p className={style.subtitle}>Hover over any element to see details.</p>
       </div>
-      <div className={style.InteractActions}>
+      <div className={style.InteractActions} ref={SVGRef}>
         <div className={style.InteractButtons}>
           <Button style={{ margin: "20px" }}>
             Execute Instruction
@@ -25,7 +28,9 @@ const Interact = () => {
           </Button>
         </div>
         <div className={style.InteractDetails}>
-          <p>Loaded :</p>
+          <p style={{ textTransform: "uppercase" }}>
+            Loaded : {rawInstruction}
+          </p>
           <p>Clock: </p>
           <p>Executed: </p>
         </div>

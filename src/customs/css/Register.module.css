@@ -26,3 +26,19 @@
 .subtitleSmaller {
   font-size: 15px;
 }
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.inputFieldWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .addressWrapper {
+    width: 100%;
+  }
+}

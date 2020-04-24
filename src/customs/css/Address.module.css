@@ -19,3 +19,8 @@
   overflow-y: scroll;
   margin: 10px 0;
 }
+@media (max-width: 900px) {
+  .addressWrapper {
+    width: 100% !important;
+  }
+}

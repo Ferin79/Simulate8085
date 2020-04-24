@@ -1,59 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import style from "./css/Register.module.css";
 import { Table, Button, Icon, TextInput } from "react-materialize";
+import { Context } from "../data/context";
 
 const ManipulateRegister = () => {
-  const [isErrorText, setisErrorText] = useState(false);
-  const [RegisterData, setRegisterData] = useState([
-    {
-      id: 0,
-      name: "W Register",
-      value: 0,
-      isEdit: false,
-    },
-    {
-      id: 1,
-      name: "Z Register",
-      value: 0,
-      isEdit: false,
-    },
-    {
-      id: 2,
-      name: "B Register",
-      value: 0,
-      isEdit: false,
-    },
-    {
-      id: 3,
-      name: "C Register",
-      value: 0,
-      isEdit: false,
-    },
-    {
-      id: 4,
-      name: "D Register",
-      value: 0,
-      isEdit: false,
-    },
-    {
-      id: 5,
-      name: "E Register",
-      value: 0,
-      isEdit: false,
-    },
-    {
-      id: 6,
-      name: "H Register",
-      value: 0,
-      isEdit: false,
-    },
-    {
-      id: 7,
-      name: "L Register",
-      value: 0,
-      isEdit: false,
-    },
-  ]);
+  const { RegisterData, setRegisterData } = useContext(Context);
 
   const handleRegisterEditBtn = (register) => {
     var datas = RegisterData;
@@ -64,13 +15,11 @@ const ManipulateRegister = () => {
     });
     setRegisterData([...datas]);
   };
-  const handleSubmitCancel = (register) => {
+  const handleSubmit = (register) => {
     var datas = RegisterData;
     datas.forEach((data) => {
       if (data.id === register.id) {
-        if (parseInt(data.value) > 255) {
-          setisErrorText(true);
-        } else {
+        if (parseInt(data.value) <= 255) {
           var deci = data.value;
           var hexString = parseInt(deci).toString(16);
           data.value = hexString;
@@ -114,14 +63,14 @@ const ManipulateRegister = () => {
         <Table centered hoverable responsive striped>
           <thead className="orange lighten-2">
             <tr>
-              <th data-field="Namee">Register Name</th>
+              <th data-field="Name">Register Name</th>
               <th data-field="value">Value</th>
               <th data-field="action">Action</th>
             </tr>
           </thead>
           <tbody>
             {RegisterData.map((register) => (
-              <tr>
+              <tr key={register.id}>
                 {register.isEdit ? (
                   <div>
                     <TextInput
@@ -145,7 +94,7 @@ const ManipulateRegister = () => {
                       small
                       waves
                       style={{ margin: "20px" }}
-                      onClick={() => handleSubmitCancel(register)}
+                      onClick={() => handleSubmit(register)}
                     >
                       Submit
                     </Button>
