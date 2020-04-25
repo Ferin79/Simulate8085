@@ -7,8 +7,37 @@ import "react-toastify/dist/ReactToastify.css";
 import { Context } from "../data/context";
 
 const ManipulateInstruction = () => {
-  const { setRawInstruction, SVGRef } = useContext(Context);
+  const {
+    rawInstruction,
+    setRawInstruction,
+    SVGRef,
+    InstructionDetails,
+  } = useContext(Context);
   toast.configure();
+
+  const handleLoad = () => {
+    const instructArr = rawInstruction.toUpperCase().split(" ");
+    const sl = [];
+    instructArr.forEach((item) => {
+      var spl = item.split(",");
+      sl.push(...spl);
+    });
+    var isCorrect;
+    InstructionDetails[0].forEach((item) => {
+      if (item.name === sl[0]) {
+        isCorrect = true;
+      }
+    });
+    if (isCorrect) {
+      toast("Instruction Loaded");
+      window.scrollTo({
+        behavior: "smooth",
+        top: SVGRef.current.offsetTop,
+      });
+    } else {
+      toast.error("Invalid Instruction");
+    }
+  };
 
   return (
     <div className={style.instructionWrapper}>
@@ -47,18 +76,7 @@ const ManipulateInstruction = () => {
           Make sure you spell check your instructions.
         </p>
       </div>
-      <Button
-        type="submit"
-        className="green lighten-1"
-        onClick={() => {
-          console.log("Here");
-          toast("Instruction Loaded");
-          window.scrollTo({
-            behavior: "smooth",
-            top: SVGRef.current.offsetTop,
-          });
-        }}
-      >
+      <Button type="submit" className="green lighten-1" onClick={handleLoad}>
         Load
       </Button>
       <ReactTooltip html />

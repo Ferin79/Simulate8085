@@ -55,8 +55,29 @@ export const ContextProvider = (props) => {
   ]);
   const [rawInstruction, setRawInstruction] = useState(null);
   const [addressRange, setAddressRange] = useState([]);
-
   const SVGRef = useRef(null);
+  const InstructionDetails = useState([
+    {
+      id: 0,
+      name: "ADD",
+      clock: 4,
+      cycle: 1,
+      group: "Arithmetic",
+    },
+    {
+      id: 1,
+      name: "ACC",
+      clock: 7,
+      group: "Arithmetic",
+    },
+    {
+      id: 2,
+      name: "MOV",
+      clock: 4,
+      cycle: 1,
+      group: "Data Transfer",
+    },
+  ]);
   return (
     <Context.Provider
       value={{
@@ -67,6 +88,7 @@ export const ContextProvider = (props) => {
         addressRange,
         setAddressRange,
         SVGRef,
+        InstructionDetails,
       }}
     >
       {props.children}
