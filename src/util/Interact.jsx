@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import style from "./css/Interact.module.css";
 import { Button, Icon } from "react-materialize";
 import { Context } from "../data/context";
+import { HandleExecute } from "../controller/HandleExecute";
 
 const Interact = () => {
-  const { SVGRef, rawInstruction } = useContext(Context);
+  const { SVGRef, rawInstruction, InstructionArray } = useContext(Context);
+
+  const handleNextClock = () => {};
 
   return (
     <div className={style.InteractWrapper}>
@@ -17,12 +20,15 @@ const Interact = () => {
       </div>
       <div className={style.InteractActions} ref={SVGRef}>
         <div className={style.InteractButtons}>
-          <Button style={{ margin: "20px" }}>
+          <Button
+            style={{ margin: "20px" }}
+            onClick={() => HandleExecute(InstructionArray)}
+          >
             Execute Instruction
             <Icon right>play_arrow</Icon>
           </Button>
 
-          <Button>
+          <Button onClick={handleNextClock}>
             Execute Next Clock
             <Icon right>fast_forward</Icon>
           </Button>

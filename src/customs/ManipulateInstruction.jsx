@@ -12,16 +12,19 @@ const ManipulateInstruction = () => {
     setRawInstruction,
     SVGRef,
     InstructionDetails,
+    setInstructionArray,
   } = useContext(Context);
   toast.configure();
 
   const handleLoad = () => {
     const instructArr = rawInstruction.toUpperCase().split(" ");
-    const sl = [];
+    var sl = [];
     instructArr.forEach((item) => {
       var spl = item.split(",");
       sl.push(...spl);
     });
+    sl = sl.filter((item) => item !== "");
+    sl = sl.filter((item) => item !== " ");
     var isCorrect;
     InstructionDetails[0].forEach((item) => {
       if (item.name === sl[0]) {
@@ -29,6 +32,7 @@ const ManipulateInstruction = () => {
       }
     });
     if (isCorrect) {
+      setInstructionArray(sl);
       toast("Instruction Loaded");
       window.scrollTo({
         behavior: "smooth",

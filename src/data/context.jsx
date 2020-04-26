@@ -78,6 +78,43 @@ export const ContextProvider = (props) => {
       group: "Data Transfer",
     },
   ]);
+
+  const [InstructionArray, setInstructionArray] = useState();
+  const [Accumulator, setAccumulator] = useState(0);
+  const [tempReg, setTempReg] = useState(0);
+  const [flags, setFlags] = useState([
+    {
+      id: 0,
+      name: "Sign Flag",
+      symbol: "S",
+      value: 0,
+    },
+    {
+      id: 1,
+      name: "Zero Flag",
+      symbol: "Z",
+      value: 0,
+    },
+    {
+      id: 2,
+      name: "Auxilary Carry",
+      symbol: "AC",
+      value: 0,
+    },
+    {
+      id: 3,
+      name: "Parity Flag",
+      symbol: "P",
+      value: 0,
+    },
+    {
+      id: 4,
+      name: "Carry Flag",
+      symbol: "C",
+      value: "0",
+    },
+  ]);
+
   return (
     <Context.Provider
       value={{
@@ -89,6 +126,14 @@ export const ContextProvider = (props) => {
         setAddressRange,
         SVGRef,
         InstructionDetails,
+        InstructionArray,
+        setInstructionArray,
+        Accumulator,
+        setAccumulator,
+        flags,
+        setFlags,
+        tempReg,
+        setTempReg,
       }}
     >
       {props.children}
