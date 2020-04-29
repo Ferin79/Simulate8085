@@ -11,7 +11,8 @@ const ManipulateInstruction = () => {
     rawInstruction,
     setRawInstruction,
     SVGRef,
-    InstructionDetails,
+    addressRange,
+    setAddressRange,
     setInstructionArray,
   } = useContext(Context);
   toast.configure();
@@ -26,11 +27,57 @@ const ManipulateInstruction = () => {
     sl = sl.filter((item) => item !== "");
     sl = sl.filter((item) => item !== " ");
     var isCorrect;
-    InstructionDetails[0].forEach((item) => {
-      if (item.name === sl[0]) {
-        isCorrect = true;
-      }
-    });
+
+    switch (sl[0]) {
+      case "ADD":
+        try {
+          if (sl[1] !== undefined || sl[1] != null) {
+            if (!isNaN(parseInt(sl[1]))) {
+              const memory = sl[1];
+              console.log("memory " + memory);
+              var data = addressRange;
+              var isAvail = false;
+              data.forEach((element) => {
+                console.log(element);
+                if (element.address === memory) {
+                  isAvail = true;
+                }
+              });
+              if (!isAvail) {
+                data.push({
+                  id: Date.now(),
+                  address: memory,
+                  value: 0,
+                });
+              }
+              setAddressRange([...data]);
+              isCorrect = true;
+            } else {
+              if (sl[1].length === 1) {
+                const register = sl[1];
+                console.log("register " + register);
+                isCorrect = true;
+              } else {
+                toast.error(`Register Name is not Valid`);
+                break;
+              }
+            }
+          } else {
+            toast.error(
+              `Register/Memory Address not Passes with ${sl[0]} Instruction`
+            );
+            break;
+          }
+        } catch (error) {
+          alert("Something Went Wrong");
+          console.log(error);
+        }
+        break;
+      default:
+        console.log("Invalid Register/Memory Address Passed");
+        break;
+    }
+
     if (isCorrect) {
       setInstructionArray(sl);
       toast("Instruction Loaded");
@@ -80,6 +127,7 @@ const ManipulateInstruction = () => {
           Make sure you spell check your instructions.
         </p>
       </div>
+
       <Button type="submit" className="green lighten-1" onClick={handleLoad}>
         Load
       </Button>

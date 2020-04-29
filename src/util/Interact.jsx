@@ -2,10 +2,13 @@ import React, { useContext } from "react";
 import style from "./css/Interact.module.css";
 import { Button, Icon } from "react-materialize";
 import { Context } from "../data/context";
-import { HandleExecute } from "../controller/HandleExecute";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Interact = () => {
-  const { SVGRef, rawInstruction, InstructionArray } = useContext(Context);
+  toast.configure();
+
+  const { SVGRef, rawInstruction } = useContext(Context);
 
   const handleNextClock = () => {};
 
@@ -20,10 +23,7 @@ const Interact = () => {
       </div>
       <div className={style.InteractActions} ref={SVGRef}>
         <div className={style.InteractButtons}>
-          <Button
-            style={{ margin: "20px" }}
-            onClick={() => HandleExecute(InstructionArray)}
-          >
+          <Button style={{ margin: "20px" }}>
             Execute Instruction
             <Icon right>play_arrow</Icon>
           </Button>
@@ -41,6 +41,7 @@ const Interact = () => {
           <p>Executed: </p>
         </div>
       </div>
+      <ToastContainer autoClose={2000} />
     </div>
   );
 };
