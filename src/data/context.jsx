@@ -6,56 +6,69 @@ export const ContextProvider = (props) => {
   const [RegisterData, setRegisterData] = useState([
     {
       id: 0,
-      name: "W Register",
-      value: 0,
+      name: "Accumulator",
+      value: "0",
       isEdit: false,
+      acronym: "ACC",
     },
     {
       id: 1,
-      name: "Z Register",
+      name: "W Register",
       value: 0,
       isEdit: false,
+      acronym: "W",
     },
     {
       id: 2,
-      name: "B Register",
+      name: "Z Register",
       value: 0,
       isEdit: false,
+      acronym: "Z",
     },
     {
       id: 3,
-      name: "C Register",
+      name: "B Register",
       value: 0,
       isEdit: false,
+      acronym: "B",
     },
     {
       id: 4,
-      name: "D Register",
+      name: "C Register",
       value: 0,
       isEdit: false,
+      acronym: "C",
     },
     {
       id: 5,
-      name: "E Register",
+      name: "D Register",
       value: 0,
       isEdit: false,
+      acronym: "D",
     },
     {
       id: 6,
-      name: "H Register",
+      name: "E Register",
       value: 0,
       isEdit: false,
+      acronym: "E",
     },
     {
       id: 7,
+      name: "H Register",
+      value: 0,
+      isEdit: false,
+      acronym: "H",
+    },
+    {
+      id: 8,
       name: "L Register",
       value: 0,
       isEdit: false,
+      acronym: "L",
     },
   ]);
-  const [rawInstruction, setRawInstruction] = useState(null);
-  const [addressRange, setAddressRange] = useState([]);
-  const SVGRef = useRef(null);
+
   const InstructionDetails = useState([
     {
       id: 0,
@@ -78,10 +91,6 @@ export const ContextProvider = (props) => {
       group: "Data Transfer",
     },
   ]);
-
-  const [InstructionArray, setInstructionArray] = useState();
-  const [Accumulator, setAccumulator] = useState(0);
-  const [tempReg, setTempReg] = useState(0);
   const [flags, setFlags] = useState([
     {
       id: 0,
@@ -114,6 +123,70 @@ export const ContextProvider = (props) => {
       value: "0",
     },
   ]);
+  const [block, setBlock] = useState([
+    {
+      id: 0,
+      name: "Databus",
+      opacity: 1,
+    },
+    {
+      id: 1,
+      name: "Accumulator",
+      opacity: 1,
+    },
+    {
+      id: 2,
+      name: "Temp",
+      opacity: 1,
+    },
+    {
+      id: 3,
+      name: "Instruction",
+      opacity: 1,
+    },
+    {
+      id: 4,
+      name: "AccLatch",
+      opacity: 1,
+    },
+    {
+      id: 5,
+      name: "FlipFlop",
+      opacity: 1,
+    },
+    {
+      id: 6,
+      name: "decoder",
+      opacity: 1,
+    },
+    {
+      id: 7,
+      name: "ALU",
+      opacity: 1,
+    },
+    {
+      id: 8,
+      name: "decimal",
+      opacity: 1,
+    },
+    {
+      id: 9,
+      name: "control",
+      opacity: 1,
+    },
+    {
+      id: 10,
+      name: "buffer",
+      opacity: 1,
+    },
+  ]);
+
+  const [isInstructionValid, setIsInstructionValid] = useState(false);
+  const [InstructionArray, setInstructionArray] = useState();
+  const [tempReg, setTempReg] = useState(0);
+  const [rawInstruction, setRawInstruction] = useState(null);
+  const [addressRange, setAddressRange] = useState([]);
+  const SVGRef = useRef(null);
 
   return (
     <Context.Provider
@@ -128,12 +201,14 @@ export const ContextProvider = (props) => {
         InstructionDetails,
         InstructionArray,
         setInstructionArray,
-        Accumulator,
-        setAccumulator,
         flags,
         setFlags,
         tempReg,
         setTempReg,
+        isInstructionValid,
+        setIsInstructionValid,
+        block,
+        setBlock,
       }}
     >
       {props.children}

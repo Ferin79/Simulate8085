@@ -14,79 +14,85 @@ const ManipulateInstruction = () => {
     addressRange,
     setAddressRange,
     setInstructionArray,
+    setIsInstructionValid,
   } = useContext(Context);
   toast.configure();
 
   const handleLoad = () => {
-    const instructArr = rawInstruction.toUpperCase().split(" ");
-    var sl = [];
-    instructArr.forEach((item) => {
-      var spl = item.split(",");
-      sl.push(...spl);
-    });
-    sl = sl.filter((item) => item !== "");
-    sl = sl.filter((item) => item !== " ");
-    var isCorrect;
+    try {
+      const instructArr = rawInstruction.toUpperCase().split(" ");
+      var sl = [];
+      instructArr.forEach((item) => {
+        var spl = item.split(",");
+        sl.push(...spl);
+      });
+      sl = sl.filter((item) => item !== "");
+      sl = sl.filter((item) => item !== " ");
+      var isCorrect;
 
-    switch (sl[0]) {
-      case "ADD":
-        try {
-          if (sl[1] !== undefined || sl[1] != null) {
-            if (!isNaN(parseInt(sl[1]))) {
-              const memory = sl[1];
-              console.log("memory " + memory);
-              var data = addressRange;
-              var isAvail = false;
-              data.forEach((element) => {
-                console.log(element);
-                if (element.address === memory) {
-                  isAvail = true;
-                }
-              });
-              if (!isAvail) {
-                data.push({
-                  id: Date.now(),
-                  address: memory,
-                  value: 0,
+      switch (sl[0]) {
+        case "ADD":
+          try {
+            if (sl[1] !== undefined || sl[1] != null) {
+              if (!isNaN(parseInt(sl[1]))) {
+                const memory = sl[1];
+                console.log("memory " + memory);
+                var data = addressRange;
+                var isAvail = false;
+                data.forEach((element) => {
+                  console.log(element);
+                  if (element.address === memory) {
+                    isAvail = true;
+                  }
                 });
-              }
-              setAddressRange([...data]);
-              isCorrect = true;
-            } else {
-              if (sl[1].length === 1) {
-                const register = sl[1];
-                console.log("register " + register);
+                if (!isAvail) {
+                  data.push({
+                    id: Date.now(),
+                    address: memory,
+                    value: 0,
+                  });
+                }
+                setAddressRange([...data]);
                 isCorrect = true;
               } else {
-                toast.error(`Register Name is not Valid`);
-                break;
+                if (sl[1].length === 1) {
+                  const register = sl[1];
+                  console.log("register " + register);
+                  isCorrect = true;
+                } else {
+                  toast.error(`Register Name is not Valid`);
+                  break;
+                }
               }
+            } else {
+              toast.error(
+                `Register/Memory Address not Passes with ${sl[0]} Instruction`
+              );
+              break;
             }
-          } else {
-            toast.error(
-              `Register/Memory Address not Passes with ${sl[0]} Instruction`
-            );
-            break;
+          } catch (error) {
+            alert("Something Went Wrong");
+            console.log(error);
           }
-        } catch (error) {
-          alert("Something Went Wrong");
-          console.log(error);
-        }
-        break;
-      default:
-        console.log("Invalid Register/Memory Address Passed");
-        break;
-    }
+          break;
+        default:
+          console.log("Invalid Register/Memory Address Passed");
+          break;
+      }
 
-    if (isCorrect) {
-      setInstructionArray(sl);
-      toast("Instruction Loaded");
-      window.scrollTo({
-        behavior: "smooth",
-        top: SVGRef.current.offsetTop,
-      });
-    } else {
-      toast.error("Invalid Instruction");
+      if (isCorrect) {
+        setInstructionArray(sl);
+        toast("Instruction Loaded");
+        setIsInstructionValid(true);
+        window.scrollTo({
+          behavior: "smooth",
+          top: SVGRef.current.offsetTop,
+        });
+      } else {
+        toast.error("Invalid Instruction");
+      }
+    } catch (error) {
+      toast.error("Error. Please Try Again");
     }
   };
 
