@@ -21,6 +21,9 @@ const Interact = () => {
     setInstructionArray,
     block,
     setBlock,
+    virtualRam,
+    setPc,
+    setIr,
   } = useContext(Context);
 
   const handleExe = () => {
@@ -30,6 +33,21 @@ const Interact = () => {
     }
   };
 
+  const handleFetchCycle = () => {
+    virtualRam.forEach((item) => {
+      setPc(item.address);
+      setIr(item.instruction);
+      const data = block;
+      data.forEach((item) => {
+        if (item.id !== 3) {
+          item.opacity = 0.3;
+        }
+      });
+      setBlock([...data]);
+    });
+  };
+  const handleDecodeCycle = () => {};
+
   const handleNextClock = () => {
     if (isInstructionValid) {
       try {
@@ -38,13 +56,11 @@ const Interact = () => {
         switch (instructionName) {
           case "ADD":
             if (currentStep === 1) {
-              var opData = block;
-              opData[0].opacity = 0.3;
-              opData[2].opacity = 0.3;
-              setBlock([...opData]);
+              handleFetchCycle();
               setCurrentStep(2);
             }
             if (currentStep === 2) {
+              handleDecodeCycle();
               setClockText("Execution Done");
               setCurrentStep(3);
               setCurrentStep(0);

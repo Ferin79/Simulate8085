@@ -2,7 +2,25 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
   background-color: #edf2f7;
+  padding: 20px 50px;
+  margin: 20px;
+}
+.SVGImages {
+  width: 65%;
+}
+@media (max-width: 900px) {
+  .svgWrapper {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px;
+    margin: 0px;
+  }
+  .SVGImages {
+    width: 100%;
+  }
 }

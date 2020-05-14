@@ -15,6 +15,8 @@ const ManipulateInstruction = () => {
     setAddressRange,
     setInstructionArray,
     setIsInstructionValid,
+    setVirtualRam,
+    virtualRam,
   } = useContext(Context);
   toast.configure();
 
@@ -82,6 +84,13 @@ const ManipulateInstruction = () => {
 
       if (isCorrect) {
         setInstructionArray(sl);
+        setVirtualRam([
+          ...virtualRam,
+          {
+            address: randomIntFromInterval(2400, 8000),
+            instruction: rawInstruction,
+          },
+        ]);
         toast("Instruction Loaded");
         setIsInstructionValid(true);
         window.scrollTo({
@@ -144,3 +153,6 @@ const ManipulateInstruction = () => {
 };
 
 export default ManipulateInstruction;
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}

@@ -187,6 +187,9 @@ export const ContextProvider = (props) => {
   const [rawInstruction, setRawInstruction] = useState(null);
   const [addressRange, setAddressRange] = useState([]);
   const SVGRef = useRef(null);
+  const [virtualRam, setVirtualRam] = useState([]);
+  const [pc, setPc] = useState(0);
+  const [ir, setIr] = useState("");
 
   return (
     <Context.Provider
@@ -209,6 +212,12 @@ export const ContextProvider = (props) => {
         setIsInstructionValid,
         block,
         setBlock,
+        virtualRam,
+        setVirtualRam,
+        pc,
+        setPc,
+        ir,
+        setIr,
       }}
     >
       {props.children}

@@ -1,0 +1,28 @@
+.virtualWrapper {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid black !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+}
+.virtualTextWrapper .title {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.virtualTextWrapper .subtitle {
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+@media (max-width: 900px) {
+  .virtualWrapper {
+    width: 100%;
+    display: none;
+  }
+}
