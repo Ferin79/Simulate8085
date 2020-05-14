@@ -128,58 +128,88 @@ export const ContextProvider = (props) => {
       id: 0,
       name: "Databus",
       opacity: 1,
+      value: 0,
     },
     {
       id: 1,
       name: "Accumulator",
       opacity: 1,
+      value: 0,
     },
     {
       id: 2,
       name: "Temp",
       opacity: 1,
+      value: 0,
     },
     {
       id: 3,
       name: "Instruction",
       opacity: 1,
+      value: 0,
     },
     {
       id: 4,
       name: "AccLatch",
       opacity: 1,
+      value: 0,
     },
     {
       id: 5,
       name: "FlipFlop",
       opacity: 1,
+      value: 0,
     },
     {
       id: 6,
       name: "decoder",
       opacity: 1,
+      value: "",
     },
     {
       id: 7,
       name: "ALU",
       opacity: 1,
+      value: 0,
     },
     {
       id: 8,
       name: "decimal",
       opacity: 1,
+      value: 0,
     },
     {
       id: 9,
       name: "control",
       opacity: 1,
+      value: 0,
     },
     {
       id: 10,
       name: "buffer",
       opacity: 1,
+      value: 0,
     },
   ]);
+  const opcodeMap = [
+    { val: "A", code: 87 },
+    { val: "B", code: 80 },
+    { val: "C", code: 81 },
+    { val: "D", code: 82 },
+    { val: "E", code: 83 },
+    { val: "H", code: 84 },
+    { val: "L", code: 85 },
+    { val: "M", code: 86 },
+  ];
+
+  const blockMap = {
+    AD0_AD7: 0,
+    Instruction_register: 3,
+    Instruction_decoder: 6,
+    A8_A15: 10,
+    ProgramCounter: 11,
+    B: 3,
+  };
 
   const [isInstructionValid, setIsInstructionValid] = useState(false);
   const [InstructionArray, setInstructionArray] = useState();
@@ -189,7 +219,6 @@ export const ContextProvider = (props) => {
   const SVGRef = useRef(null);
   const [virtualRam, setVirtualRam] = useState([]);
   const [pc, setPc] = useState(0);
-  const [ir, setIr] = useState("");
   const [animationSpeed, setAnimationSpeed] = useState(0.5);
 
   return (
@@ -217,10 +246,10 @@ export const ContextProvider = (props) => {
         setVirtualRam,
         pc,
         setPc,
-        ir,
-        setIr,
         animationSpeed,
         setAnimationSpeed,
+        opcodeMap,
+        blockMap,
       }}
     >
       {props.children}

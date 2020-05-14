@@ -23,9 +23,10 @@ const Interact = () => {
     setBlock,
     virtualRam,
     setPc,
-    setIr,
     animationSpeed,
     setAnimationSpeed,
+    opcodeMap,
+    blockMap,
   } = useContext(Context);
 
   const handleExe = () => {
@@ -35,26 +36,66 @@ const Interact = () => {
     }
   };
 
+  const executionComplete = () => {
+    setCurrentStep(0);
+    setIsInstructionValid(false);
+    setAddressRange([]);
+    setRawInstruction(null);
+    setInstructionArray(null);
+    toast("Execution Completed");
+  };
   const handleFetchCycle = () => {
-    virtualRam.forEach((item) => {
-      setPc(item.address);
-      setIr(item.instruction);
+    virtualRam.forEach((virItem) => {
+      setPc(virItem.address);
       const data = block;
       data.forEach((item) => {
         if (item.id !== 3) {
           item.opacity = 0.3;
+        } else {
+          item.value = virItem.instruction;
         }
       });
       setBlock([...data]);
     });
   };
-  const handleDecodeCycle = () => {};
+  const handleDecodeCycle = () => {
+    var opData = block;
+
+    opData.forEach((element) => {
+      element.opacity = 1;
+    });
+
+    setBlock([...opData]);
+    setTimeout(() => {
+      opcodeMap.forEach((element) => {
+        var opData = block;
+        if (element.val === InstructionArray[1]) {
+          console.log("this is element code " + element.code);
+          opData[blockMap.AD0_AD7].value = element.code;
+          opData[blockMap.Instruction_decoder].value =
+            "Decoded instruction and stored it in data buffer";
+        }
+
+        opData.forEach((item, index) => {
+          if (
+            index === blockMap.AD0_AD7 ||
+            index === blockMap.Instruction_decoder
+          ) {
+            item.opacity = 1;
+          } else {
+            item.opacity = 0.3;
+          }
+        });
+      });
+
+      setBlock([...opData]);
+    }, 500);
+  };
 
   const handleNextClock = () => {
     if (isInstructionValid) {
       try {
         const instructionName = InstructionArray[0];
-        console.log(InstructionArray);
         switch (instructionName) {
           case "ADD":
             if (currentStep === 1) {
@@ -63,14 +104,11 @@ const Interact = () => {
             }
             if (currentStep === 2) {
               handleDecodeCycle();
-              setClockText("Execution Done");
               setCurrentStep(3);
-              setCurrentStep(0);
-              setIsInstructionValid(false);
-              setAddressRange([]);
-              setRawInstruction(null);
-              setInstructionArray(null);
-              toast("Execution Completed");
+            }
+            if (currentStep === 3) {
+              setClockText("Execution Done");
+              executionComplete();
             }
             break;
           default:
