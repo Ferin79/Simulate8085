@@ -3,12 +3,20 @@ import ReactTooltip from "react-tooltip";
 import { Context } from "../data/context";
 
 const SVGImages = () => {
-  const { flags, RegisterData, tempReg, block, pc, ir } = useContext(Context);
+  const {
+    flags,
+    RegisterData,
+    tempReg,
+    block,
+    pc,
+    ir,
+    animationSpeed,
+  } = useContext(Context);
   return (
     <React.Fragment>
       <svg
-        width="1000"
-        height="950"
+        width="950"
+        height="850"
         viewBox="0 0 1000 1000"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -100,14 +108,14 @@ const SVGImages = () => {
               />
               <g
                 id="InstructionRegister"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[3].opacity}
               >
                 <path
                   data-tip={`<h5 style="text-transform:uppercase">${ir}</h5>`}
                   id="InstructionRegisterRect"
                   d="M696.037 293.561H566.099V359.222H696.037V293.561Z"
-                  fill="#E6E6E6"
+                  fill={block[3].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.28188"
                 />
@@ -119,7 +127,9 @@ const SVGImages = () => {
               </g>
               <g
                 id="Accumulator"
-                style={{ transition: "all 0.5s ease" }}
+                style={{
+                  transition: `all ${animationSpeed}s ease-in-out`,
+                }}
                 opacity={block[1].opacity}
               >
                 <path
@@ -130,7 +140,7 @@ const SVGImages = () => {
                   }
                   id="AccRect"
                   d="M186.955 276.778H57.0159V342.44H186.955V276.778Z"
-                  fill="#E6E6E6"
+                  fill={block[1].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.28188"
                 />
@@ -142,7 +152,7 @@ const SVGImages = () => {
               </g>
               <g
                 id="Temporary"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[2].opacity}
               >
                 <path
@@ -153,7 +163,7 @@ const SVGImages = () => {
                   }
                   id="TempRect"
                   d="M334.753 276.778H204.814V342.44H334.753V276.778Z"
-                  fill="#E6E6E6"
+                  fill={block[2].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.28188"
                 />
@@ -172,13 +182,13 @@ const SVGImages = () => {
               </g>
               <g
                 id="DataBus"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[0].opacity}
               >
                 <path
                   id="DatabusRect"
                   d="M699.06 79.3466H545.399V148.191H699.06V79.3466Z"
-                  fill="#E6E6E6"
+                  fill={block[0].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.28188"
                 />
@@ -190,7 +200,7 @@ const SVGImages = () => {
               </g>
               <g
                 id="ALU"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[7].opacity}
               >
                 <path
@@ -198,7 +208,7 @@ const SVGImages = () => {
                   fill-rule="evenodd"
                   clip-rule="evenodd"
                   d="M336.149 661.474V601.965L378.04 578.161L336.149 554.357V494.847L466.171 542.455V613.867L336.149 661.474Z"
-                  fill="#FF5555"
+                  fill={block[7].opacity === 1 ? "#FF5555" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.28188"
                 />
@@ -210,13 +220,13 @@ const SVGImages = () => {
               </g>
               <g
                 id="DecimalAdjust"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[8].opacity}
               >
                 <path
                   id="DecimalAdjustRect"
                   d="M466.087 696.346H336.149V762.007H466.087V696.346Z"
-                  fill="#E6E6E6"
+                  fill={block[8].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.28188"
                 />
@@ -228,13 +238,13 @@ const SVGImages = () => {
               </g>
               <g
                 id="InstructionDecoder"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[6].opacity}
               >
                 <path
                   id="InstructionDecoderRect"
                   d="M698.185 444.466H568.844V576.648H698.185V444.466Z"
-                  fill="#E6E6E6"
+                  fill={block[6].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.28188"
                 />
@@ -246,13 +256,13 @@ const SVGImages = () => {
               </g>
               <g
                 id="TimingControl"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[9].opacity}
               >
                 <path
                   id="TimingControlText"
                   d="M711.667 797.848H111.374V868.829H711.667V797.848Z"
-                  fill="#E6E6E6"
+                  fill={block[9].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.27559"
                 />
@@ -1139,13 +1149,13 @@ const SVGImages = () => {
               />
               <g
                 id="AddressBuffer"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[10].opacity}
               >
                 <path
                   id="AddressBufferRect"
                   d="M966.845 815.281H787.642V866.109H966.845V815.281Z"
-                  fill="#E6E6E6"
+                  fill={block[10].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.3748"
                 />
@@ -1202,13 +1212,13 @@ const SVGImages = () => {
               />
               <g
                 id="AccLatch"
-                style={{ transition: "all 0.5s ease" }}
+                style={{ transition: `all ${animationSpeed}s ease-in-out` }}
                 opacity={block[4].opacity}
               >
                 <path
                   id="AccLatchRect"
                   d="M187.095 413.353H57.1562V479.014H187.095V413.353Z"
-                  fill="#E6E6E6"
+                  fill={block[4].opacity === 1 ? "#E6E6E6" : "rgba(0,0,0,0.7)"}
                   stroke="black"
                   stroke-width="1.28188"
                 />

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import style from "./css/Interact.module.css";
-import { Button, Icon } from "react-materialize";
+import { Button, Icon, Range } from "react-materialize";
 import { Context } from "../data/context";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,6 +24,8 @@ const Interact = () => {
     virtualRam,
     setPc,
     setIr,
+    animationSpeed,
+    setAnimationSpeed,
   } = useContext(Context);
 
   const handleExe = () => {
@@ -103,6 +105,21 @@ const Interact = () => {
             Execute Next Clock
             <Icon right>fast_forward</Icon>
           </Button>
+
+          <div className={style.animateWrapper}>
+            <p>Animation Speed:</p>
+            <Range
+              max="10"
+              min="0.5"
+              name="points"
+              value={animationSpeed}
+              connect={true}
+              step="0.5"
+              style={{ width: 200, padding: 10, margin: 10 }}
+              onChange={(event) => setAnimationSpeed(event.target.value)}
+            />
+            <p>{animationSpeed} Seconds</p>
+          </div>
         </div>
         <div className={style.InteractDetails}>
           <p style={{ textTransform: "uppercase" }}>

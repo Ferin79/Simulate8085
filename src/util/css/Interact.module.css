@@ -15,6 +15,15 @@
 .InteractTitle .subtitle {
   font-size: 16px;
 }
+.InteractButtons,
+.animateWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.animateWrapper {
+  margin: 0px 20px;
+}
 .InteractActions {
   width: 100%;
   background-color: rgba(235, 227, 235, 0.774);

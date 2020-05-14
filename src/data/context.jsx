@@ -190,6 +190,7 @@ export const ContextProvider = (props) => {
   const [virtualRam, setVirtualRam] = useState([]);
   const [pc, setPc] = useState(0);
   const [ir, setIr] = useState("");
+  const [animationSpeed, setAnimationSpeed] = useState(0.5);
 
   return (
     <Context.Provider
@@ -218,6 +219,8 @@ export const ContextProvider = (props) => {
         setPc,
         ir,
         setIr,
+        animationSpeed,
+        setAnimationSpeed,
       }}
     >
       {props.children}
