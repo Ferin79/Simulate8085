@@ -20,6 +20,65 @@ const ManipulateInstruction = () => {
   } = useContext(Context);
   toast.configure();
 
+  const handleCheckRegisterAndMemory = (sl) => {
+    try {
+      var isCorrect = false;
+      if (sl[1] !== undefined || sl[1] != null) {
+        if (!isNaN(parseInt(sl[1]))) {
+          const memory = sl[1];
+          var data = addressRange;
+          var isAvail = false;
+          data.forEach((element) => {
+            console.log(element);
+            if (element.address === memory) {
+              isAvail = true;
+            }
+          });
+          if (!isAvail) {
+            data.push({
+              id: Date.now(),
+              address: memory,
+              value: 0,
+            });
+          }
+          setAddressRange([...data]);
+          isCorrect = true;
+        } else {
+          if (sl[1].length === 1) {
+            isCorrect = true;
+          } else {
+            toast.error(`Register Name is not Valid`);
+          }
+        }
+      } else {
+        toast.error(
+          `Register/Memory Address not pass with ${sl[0]} Instruction`
+        );
+      }
+      return isCorrect;
+    } catch (error) {
+      console.log(error);
+      alert("Something goes wrong. Please try again");
+      return false;
+    }
+  };
+
+  const validate8bitData = (sl) => {
+    let isCorrect = false;
+    if (sl[1]) {
+      const value = parseInt(sl[1]);
+      if (value > 255) {
+        toast.error(`${sl[0]} Only Accept Value between 0 and 255`);
+        return isCorrect;
+      } else {
+        return true;
+      }
+    } else {
+      toast.error(`No Value pass with ${sl[0]}`);
+      return false;
+    }
+  };
+
   const handleLoad = () => {
     try {
       const instructArr = rawInstruction.toUpperCase().split(" ");
@@ -30,52 +89,14 @@ const ManipulateInstruction = () => {
       });
       sl = sl.filter((item) => item !== "");
       sl = sl.filter((item) => item !== " ");
-      var isCorrect;
+      var isCorrect = false;
 
       switch (sl[0]) {
         case "ADD":
-          try {
-            if (sl[1] !== undefined || sl[1] != null) {
-              if (!isNaN(parseInt(sl[1]))) {
-                const memory = sl[1];
-                console.log("memory " + memory);
-                var data = addressRange;
-                var isAvail = false;
-                data.forEach((element) => {
-                  console.log(element);
-                  if (element.address === memory) {
-                    isAvail = true;
-                  }
-                });
-                if (!isAvail) {
-                  data.push({
-                    id: Date.now(),
-                    address: memory,
-                    value: 0,
-                  });
-                }
-                setAddressRange([...data]);
-                isCorrect = true;
-              } else {
-                if (sl[1].length === 1) {
-                  const register = sl[1];
-                  console.log("register " + register);
-                  isCorrect = true;
-                } else {
-                  toast.error(`Register Name is not Valid`);
-                  break;
-                }
-              }
-            } else {
-              toast.error(
-                `Register/Memory Address not Passes with ${sl[0]} Instruction`
-              );
-              break;
-            }
-          } catch (error) {
-            alert("Something Went Wrong");
-            console.log(error);
-          }
+          isCorrect = handleCheckRegisterAndMemory(sl);
+          break;
+        case "ADI":
+          isCorrect = validate8bitData(sl);
           break;
         default:
           console.log("Invalid Register/Memory Address Passed");
@@ -101,6 +122,7 @@ const ManipulateInstruction = () => {
         toast.error("Invalid Instruction");
       }
     } catch (error) {
+      console.log(error);
       toast.error("Error. Please Try Again");
     }
   };

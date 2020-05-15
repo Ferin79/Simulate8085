@@ -43,7 +43,35 @@ const Interact = () => {
       toast.error("No Instruction Loaded");
     }
   };
-
+  const handleAddInstruction = (acc, value) => {
+    acc = acc + value;
+    let hexAns = acc.toString(16);
+    if (hexAns.length > 2) {
+      hexAns = `${hexAns[hexAns.length - 2]}${hexAns[hexAns.length - 1]}`;
+    }
+    setFlagsValue(acc);
+    let blockData = block;
+    blockData.forEach((item) => {
+      if (
+        item.id === 1 ||
+        item.id === 4 ||
+        item.id === 7 ||
+        item.id === 8 ||
+        item.id === 9
+      ) {
+        item.value = hexAns;
+        item.opacity = 1;
+      }
+    });
+    let regData = RegisterData;
+    regData.forEach((item) => {
+      if (item.acronym === "A") {
+        item.value = hexAns;
+      }
+    });
+    setRegisterData([...regData]);
+    setBlock([...blockData]);
+  };
   const handleFetchCycle = () => {
     virtualRam.forEach((virItem) => {
       setPc(virItem.address);
@@ -121,34 +149,13 @@ const Interact = () => {
     switch (name) {
       case "ADD":
         let acc = parseInt(RegisterData[0].value, 16);
-        const value = fetchSecondValue();
-        acc = acc + value;
-        let hexAns = acc.toString(16);
-        if (hexAns.length > 2) {
-          hexAns = `${hexAns[hexAns.length - 2]}${hexAns[hexAns.length - 1]}`;
-        }
-        setFlagsValue(acc);
-        const blockData = block;
-        blockData.forEach((item) => {
-          if (
-            item.id === 1 ||
-            item.id === 4 ||
-            item.id === 7 ||
-            item.id === 8 ||
-            item.id === 9
-          ) {
-            item.value = hexAns;
-            item.opacity = 1;
-          }
-        });
-        const regData = RegisterData;
-        regData.forEach((item) => {
-          if (item.acronym === "A") {
-            item.value = hexAns;
-          }
-        });
-        setRegisterData([...regData]);
-        setBlock([...blockData]);
+        let value = fetchSecondValue();
+        handleAddInstruction(acc, value);
+        break;
+      case "ADI":
+        let acc2 = parseInt(RegisterData[0].value, 16);
+        let sec = parseInt(InstructionArray[1]);
+        handleAddInstruction(acc2, sec);
         break;
       default:
         break;
@@ -200,7 +207,7 @@ const Interact = () => {
     setVirtualRam([]);
     setIsInstructionValid(false);
     setAddressRange([]);
-    setRawInstruction(null);
+    setRawInstruction("");
     setInstructionArray(null);
     toast("Execution Completed");
   };

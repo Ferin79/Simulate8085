@@ -73,21 +73,16 @@ export const ContextProvider = (props) => {
     {
       id: 0,
       name: "ADD",
-      clock: 4,
-      cycle: 1,
       group: "Arithmetic",
     },
     {
       id: 1,
-      name: "ACC",
-      clock: 7,
+      name: "ADI",
       group: "Arithmetic",
     },
     {
       id: 2,
       name: "MOV",
-      clock: 4,
-      cycle: 1,
       group: "Data Transfer",
     },
   ]);
