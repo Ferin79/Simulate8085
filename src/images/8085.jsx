@@ -238,7 +238,7 @@ const SVGImages = () => {
               >
                 <path
                   data-tip={
-                    block[7].opacity === 1
+                    block[8].opacity === 1
                       ? `<h5>Decimal Adjust</h5><p>DA adjusts the contents of the Accumulator to correspond to a BCD <br/>(Binary Coded Decimal) number after two BCD numbers have been added by the ADD or ADDC instruction</p>`
                       : null
                   }
@@ -284,7 +284,7 @@ const SVGImages = () => {
               >
                 <path
                   data-tip={
-                    block[7].opacity === 1
+                    block[9].opacity === 1
                       ? `<h5>Timing and Control Unit</h5><p>Timing and Controlling unit in 8085 for the generation of timing signals and the signals to control.<br/> All the operations and functions both interior and exterior of a microprocessor are controlled by this unit. </p>`
                       : null
                   }

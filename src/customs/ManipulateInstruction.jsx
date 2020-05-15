@@ -98,6 +98,12 @@ const ManipulateInstruction = () => {
         case "ADI":
           isCorrect = validate8bitData(sl);
           break;
+        case "SUB":
+          isCorrect = handleCheckRegisterAndMemory(sl);
+          break;
+        case "SUI":
+          isCorrect = validate8bitData(sl);
+          break;
         default:
           console.log("Invalid Register/Memory Address Passed");
           break;
@@ -133,6 +139,10 @@ const ManipulateInstruction = () => {
         <p className={style.title}>Instruction Editing</p>
         <p className={style.subtitle}>
           Instructions can use both Registers and Memory
+        </p>
+        <p>
+          Address and value should be enter in decimal. Later it will be
+          converted into hex numbers.
         </p>
       </div>
       <div className={style.instructionInput}>

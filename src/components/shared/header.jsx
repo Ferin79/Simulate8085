@@ -1,12 +1,11 @@
 import React from "react";
 import "materialize-css";
 import { Navbar, Icon, NavItem } from "react-materialize";
-import { SocialIcon } from "react-social-icons";
 
 const Header = () => {
   return (
     <Navbar
-      className="black"
+      className="blue center"
       alignLinks="right"
       brand={
         // eslint-disable-next-line
@@ -16,10 +15,7 @@ const Header = () => {
       menuIcon={<Icon>menu</Icon>}
     >
       <NavItem>
-        <SocialIcon url="https://www.github.com/ferin79" />
-      </NavItem>
-      <NavItem>
-        <SocialIcon url="https://www.instagram.com/ferin_patel_79" />
+        <i className="material-icons">share</i>
       </NavItem>
     </Navbar>
   );

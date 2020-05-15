@@ -82,8 +82,13 @@ export const ContextProvider = (props) => {
     },
     {
       id: 2,
-      name: "MOV",
-      group: "Data Transfer",
+      name: "SUB",
+      group: "Arithmetic",
+    },
+    {
+      id: 3,
+      name: "SUI",
+      group: "Arithmetic",
     },
   ]);
   const [flags, setFlags] = useState([

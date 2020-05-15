@@ -43,8 +43,17 @@ const Interact = () => {
       toast.error("No Instruction Loaded");
     }
   };
-  const handleAddInstruction = (acc, value) => {
-    acc = acc + value;
+  const handleAddInstruction = (acc, value, op) => {
+    switch (op) {
+      case "+":
+        acc = acc + value;
+        break;
+      case "-":
+        acc = acc - value;
+        break;
+      default:
+        break;
+    }
     let hexAns = acc.toString(16);
     if (hexAns.length > 2) {
       hexAns = `${hexAns[hexAns.length - 2]}${hexAns[hexAns.length - 1]}`;
@@ -76,11 +85,12 @@ const Interact = () => {
     virtualRam.forEach((virItem) => {
       setPc(virItem.address);
       const data = block;
+      data[3].value = virItem.instruction;
       data.forEach((item) => {
-        if (item.id !== 3) {
-          item.opacity = 0.3;
+        if (item.id === 3 || item.id === 9) {
+          item.opacity = 1;
         } else {
-          item.value = virItem.instruction;
+          item.opacity = 0.3;
         }
       });
       setBlock([...data]);
@@ -150,12 +160,22 @@ const Interact = () => {
       case "ADD":
         let acc = parseInt(RegisterData[0].value, 16);
         let value = fetchSecondValue();
-        handleAddInstruction(acc, value);
+        handleAddInstruction(acc, value, "+");
         break;
       case "ADI":
         let acc2 = parseInt(RegisterData[0].value, 16);
-        let sec = parseInt(InstructionArray[1]);
-        handleAddInstruction(acc2, sec);
+        let value2 = parseInt(InstructionArray[1]);
+        handleAddInstruction(acc2, value2, "+");
+        break;
+      case "SUB":
+        let acc3 = parseInt(RegisterData[0].value, 16);
+        let value3 = fetchSecondValue();
+        handleAddInstruction(acc3, value3, "-");
+        break;
+      case "SUI":
+        let acc4 = parseInt(RegisterData[0].value, 16);
+        let value4 = parseInt(InstructionArray[1]);
+        handleAddInstruction(acc4, value4, "-");
         break;
       default:
         break;
@@ -211,7 +231,6 @@ const Interact = () => {
     setInstructionArray(null);
     toast("Execution Completed");
   };
-
   const handleNextClock = () => {
     if (isInstructionValid) {
       window.scrollTo({

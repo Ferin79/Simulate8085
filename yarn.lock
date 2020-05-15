@@ -8640,13 +8640,6 @@ react-scripts@3.4.1:
   optionalDependencies:
     fsevents "2.1.2"
 
-react-social-icons@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/react-social-icons/-/react-social-icons-4.1.0.tgz#d8c1f846783cba15ae0e75704377bc67805f4c20"
-  integrity sha512-wbwSbyS4QWjpL6U+GFZDBrE5Ao8px0QkRgo0XkxDHF2LNRsFNErSDnIPKiowhQ7t7IyrSA2HYrEw7ETgpVTg+Q==
-  dependencies:
-    prop-types "^15.6.2"
-
 react-svgmt@^1.1.11:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/react-svgmt/-/react-svgmt-1.1.11.tgz#2c28477ccc44e6bbfa621a92476c5c4b579a1022"

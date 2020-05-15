@@ -10,6 +10,7 @@
   justify-content: flex-start;
   align-items: center;
   padding: 10px;
+  position: relative;
 }
 .virtualTextWrapper .title {
   font-size: 30px;
@@ -19,6 +20,11 @@
 .virtualTextWrapper .subtitle {
   font-size: 20px;
   margin-bottom: 50px;
+}
+.conversionWrapper {
+  position: absolute;
+  bottom: 10%;
+  width: 75%;
 }
 @media (max-width: 900px) {
   .virtualWrapper {
