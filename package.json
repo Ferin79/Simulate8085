@@ -1,8 +1,8 @@
 {
-  "name": "stimulate8085",
+  "name": "emulate8085",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ferin79.github.io/Stimulate8085",
+  "homepage": "https://ferin79.github.io/Emulate8085",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
