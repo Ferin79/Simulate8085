@@ -9,7 +9,7 @@ export const ContextProvider = (props) => {
       name: "Accumulator",
       value: "0",
       isEdit: false,
-      acronym: "ACC",
+      acronym: "A",
     },
     {
       id: 1,
@@ -97,30 +97,39 @@ export const ContextProvider = (props) => {
       name: "Sign Flag",
       symbol: "S",
       value: 0,
+      desc: "If MSB bit 0 then the number is positive, else it is negative.",
     },
     {
       id: 1,
       name: "Zero Flag",
       symbol: "Z",
       value: 0,
+      desc:
+        "If an operation performed in ALU results 0 <br/>value of entire 8-bits then zero flag is set, else it resets.",
     },
     {
       id: 2,
       name: "Auxilary Carry",
       symbol: "AC",
       value: 0,
+      desc:
+        "f an operation performed in ALU generates the carry from lower nibble (D0 to D3) <br> to upper nibble (D4 to D7) AC flag is set, else it resets.",
     },
     {
       id: 3,
       name: "Parity Flag",
       symbol: "P",
       value: 0,
+      desc:
+        "If the result contains even no. of ones this flag is set and for odd no. of ones this flag is reset",
     },
     {
       id: 4,
       name: "Carry Flag",
       symbol: "C",
       value: "0",
+      desc:
+        "If an operation performed in ALU generates the carry from D7 to next stage then CY flag is set, else it is reset.",
     },
   ]);
   const [block, setBlock] = useState([
@@ -216,10 +225,11 @@ export const ContextProvider = (props) => {
   const [tempReg, setTempReg] = useState(0);
   const [rawInstruction, setRawInstruction] = useState(null);
   const [addressRange, setAddressRange] = useState([]);
-  const SVGRef = useRef(null);
   const [virtualRam, setVirtualRam] = useState([]);
   const [pc, setPc] = useState(0);
   const [animationSpeed, setAnimationSpeed] = useState(0.5);
+  const SVGRef = useRef(null);
+  const DiagramRef = useRef(null);
 
   return (
     <Context.Provider
@@ -250,6 +260,7 @@ export const ContextProvider = (props) => {
         setAnimationSpeed,
         opcodeMap,
         blockMap,
+        DiagramRef,
       }}
     >
       {props.children}

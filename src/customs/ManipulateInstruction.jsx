@@ -120,6 +120,7 @@ const ManipulateInstruction = () => {
           required
           validate
           error="Invalid Instrction"
+          value={rawInstruction}
           onChange={(event) => setRawInstruction(event.target.value)}
         />
       </div>
