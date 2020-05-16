@@ -90,6 +90,36 @@ export const ContextProvider = (props) => {
       name: "SUI",
       group: "Arithmetic",
     },
+    {
+      id: 4,
+      name: "MOV",
+      group: "Data Transfer",
+    },
+    {
+      id: 5,
+      name: "MVI",
+      group: "Data Transfer",
+    },
+    {
+      id: 6,
+      name: "LDA",
+      group: "Data Transfer",
+    },
+    {
+      id: 7,
+      name: "STA",
+      group: "Data Transfer",
+    },
+    {
+      id: 8,
+      name: "LHLD",
+      group: "Data Transfer",
+    },
+    {
+      id: 9,
+      name: "SHLD",
+      group: "Data Transfer",
+    },
   ]);
   const [flags, setFlags] = useState([
     {
@@ -222,7 +252,6 @@ export const ContextProvider = (props) => {
 
   const [isInstructionValid, setIsInstructionValid] = useState(false);
   const [InstructionArray, setInstructionArray] = useState();
-  const [tempReg, setTempReg] = useState(0);
   const [rawInstruction, setRawInstruction] = useState(null);
   const [addressRange, setAddressRange] = useState([]);
   const [virtualRam, setVirtualRam] = useState([]);
@@ -246,8 +275,6 @@ export const ContextProvider = (props) => {
         setInstructionArray,
         flags,
         setFlags,
-        tempReg,
-        setTempReg,
         isInstructionValid,
         setIsInstructionValid,
         block,

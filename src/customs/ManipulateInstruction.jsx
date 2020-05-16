@@ -17,38 +17,47 @@ const ManipulateInstruction = () => {
     setIsInstructionValid,
     setVirtualRam,
     virtualRam,
+    RegisterData,
   } = useContext(Context);
   toast.configure();
 
-  const handleCheckRegisterAndMemory = (sl) => {
+  const validate16bit = (sl, index) => {
+    let isCorrect = false;
     try {
-      var isCorrect = false;
-      if (sl[1] !== undefined || sl[1] != null) {
-        if (!isNaN(parseInt(sl[1]))) {
-          const memory = sl[1];
-          var data = addressRange;
-          var isAvail = false;
-          data.forEach((element) => {
-            console.log(element);
-            if (element.address === memory) {
-              isAvail = true;
-            }
-          });
-          if (!isAvail) {
-            data.push({
-              id: Date.now(),
-              address: memory,
-              value: 0,
-            });
+      if (!isNaN(parseInt(sl[index]))) {
+        const memory = sl[index];
+        var data = addressRange;
+        var isAvail = false;
+        data.forEach((element) => {
+          if (element.address === memory) {
+            isAvail = true;
+            isCorrect = true;
           }
+        });
+        if (!isAvail) {
+          data.push({
+            id: Date.now(),
+            address: memory,
+            value: 0,
+          });
           setAddressRange([...data]);
           isCorrect = true;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      isCorrect = false;
+    }
+    return isCorrect;
+  };
+  const handleCheckRegisterAndMemory = (sl, index) => {
+    try {
+      var isCorrect = false;
+      if (sl[index] !== undefined || sl[index] != null) {
+        if (!isNaN(parseInt(sl[index]))) {
+          isCorrect = validate16bit(sl, index);
         } else {
-          if (sl[1].length === 1) {
-            isCorrect = true;
-          } else {
-            toast.error(`Register Name is not Valid`);
-          }
+          isCorrect = validateRegisterOnly(sl, 1);
         }
       } else {
         toast.error(
@@ -62,12 +71,12 @@ const ManipulateInstruction = () => {
       return false;
     }
   };
-
-  const validate8bitData = (sl) => {
+  const validate8bitData = (sl, index) => {
     let isCorrect = false;
-    if (sl[1]) {
-      const value = parseInt(sl[1]);
-      if (value > 255) {
+    if (sl[index]) {
+      const value = parseInt(sl[index]);
+      console.log(value);
+      if (isNaN(value) || value > 255) {
         toast.error(`${sl[0]} Only Accept Value between 0 and 255`);
         return isCorrect;
       } else {
@@ -78,7 +87,21 @@ const ManipulateInstruction = () => {
       return false;
     }
   };
-
+  const validateRegisterOnly = (sl, index) => {
+    try {
+      let isCorrect = false;
+      RegisterData.forEach((item) => {
+        console.log(sl[index].toUpperCase());
+        if (sl[index].toUpperCase() === item.acronym) {
+          isCorrect = true;
+        }
+      });
+      return isCorrect;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
   const handleLoad = () => {
     try {
       const instructArr = rawInstruction.toUpperCase().split(" ");
@@ -93,16 +116,34 @@ const ManipulateInstruction = () => {
 
       switch (sl[0]) {
         case "ADD":
-          isCorrect = handleCheckRegisterAndMemory(sl);
+          isCorrect = handleCheckRegisterAndMemory(sl, 1);
           break;
         case "ADI":
-          isCorrect = validate8bitData(sl);
+          isCorrect = validate8bitData(sl, 1);
           break;
         case "SUB":
-          isCorrect = handleCheckRegisterAndMemory(sl);
+          isCorrect = handleCheckRegisterAndMemory(sl, 1);
           break;
         case "SUI":
-          isCorrect = validate8bitData(sl);
+          isCorrect = validate8bitData(sl, 1);
+          break;
+        case "MOV":
+          isCorrect = validateRegisterOnly(sl, 1);
+          if (isCorrect) {
+            isCorrect = handleCheckRegisterAndMemory(sl, 2);
+          }
+          break;
+        case "MVI":
+          isCorrect = validateRegisterOnly(sl, 1);
+          if (isCorrect) {
+            isCorrect = validate8bitData(sl, 2);
+          }
+          break;
+        case "LDA":
+        case "STA":
+        case "LHLD":
+        case "SHLD":
+          isCorrect = validate16bit(sl, 1);
           break;
         default:
           console.log("Invalid Register/Memory Address Passed");

@@ -155,32 +155,6 @@ const Interact = () => {
       }
     }, 500);
   };
-  const handleExecutionCycle = (name) => {
-    switch (name) {
-      case "ADD":
-        let acc = parseInt(RegisterData[0].value, 16);
-        let value = fetchSecondValue();
-        handleAddInstruction(acc, value, "+");
-        break;
-      case "ADI":
-        let acc2 = parseInt(RegisterData[0].value, 16);
-        let value2 = parseInt(InstructionArray[1]);
-        handleAddInstruction(acc2, value2, "+");
-        break;
-      case "SUB":
-        let acc3 = parseInt(RegisterData[0].value, 16);
-        let value3 = fetchSecondValue();
-        handleAddInstruction(acc3, value3, "-");
-        break;
-      case "SUI":
-        let acc4 = parseInt(RegisterData[0].value, 16);
-        let value4 = parseInt(InstructionArray[1]);
-        handleAddInstruction(acc4, value4, "-");
-        break;
-      default:
-        break;
-    }
-  };
   const setFlagsValue = (acc) => {
     const flagData = flags;
     if (acc === 0) {
@@ -204,10 +178,10 @@ const Interact = () => {
     }
     setFlags([...flagData]);
   };
-  const fetchSecondValue = () => {
+  const fetchSecondValue = (index) => {
     let value;
-    if (!isNaN(parseInt(InstructionArray[1]))) {
-      const memory = InstructionArray[1];
+    if (!isNaN(parseInt(InstructionArray[index]))) {
+      const memory = InstructionArray[index];
       addressRange.forEach((item) => {
         if (item.address === memory) {
           value = parseInt(item.value, 16);
@@ -215,7 +189,7 @@ const Interact = () => {
       });
     } else {
       RegisterData.forEach((element) => {
-        if (element.acronym === InstructionArray[1].toUpperCase()) {
+        if (element.acronym === InstructionArray[index].toUpperCase()) {
           value = parseInt(element.value, 16);
         }
       });
@@ -226,7 +200,6 @@ const Interact = () => {
     setCurrentStep(0);
     setVirtualRam([]);
     setIsInstructionValid(false);
-    setAddressRange([]);
     setRawInstruction("");
     setInstructionArray(null);
     toast("Execution Completed");
@@ -262,6 +235,152 @@ const Interact = () => {
       }
     } else {
       toast.error("No Instruction Loaded");
+    }
+  };
+  const handleMov = (val1, val2) => {
+    val1 = val2;
+
+    const blockData = block;
+    const regData = RegisterData;
+
+    regData.forEach((item) => {
+      if (item.acronym === InstructionArray[1]) {
+        item.value = val1.toString(16);
+      }
+    });
+
+    blockData.forEach((item) => {
+      if (item.id === 9 || item.id === 7) {
+        item.opacity = 1;
+      }
+    });
+    setRegisterData([...regData]);
+    setBlock([...blockData]);
+  };
+  const storeValueIntoMemory = (val) => {
+    const memory = InstructionArray[1];
+    var data = addressRange;
+    var isAvail = false;
+    data.forEach((element) => {
+      if (element.address === memory) {
+        isAvail = true;
+        element.value = val;
+      }
+    });
+    if (!isAvail) {
+      data.push({
+        id: Date.now(),
+        address: memory,
+        value: val,
+      });
+    }
+    const blockData = block;
+    blockData.forEach((item) => {
+      item.opacity = 1;
+    });
+    setBlock([...blockData]);
+    setAddressRange([...data]);
+  };
+  const handleExecutionCycle = (name) => {
+    switch (name) {
+      case "ADD":
+        let acc = parseInt(RegisterData[0].value, 16);
+        let value = fetchSecondValue(1);
+        handleAddInstruction(acc, value, "+");
+        break;
+      case "ADI":
+        let acc2 = parseInt(RegisterData[0].value, 16);
+        let value2 = parseInt(InstructionArray[1]);
+        handleAddInstruction(acc2, value2, "+");
+        break;
+      case "SUB":
+        let acc3 = parseInt(RegisterData[0].value, 16);
+        let value3 = fetchSecondValue(1);
+        handleAddInstruction(acc3, value3, "-");
+        break;
+      case "SUI":
+        let acc4 = parseInt(RegisterData[0].value, 16);
+        let value4 = parseInt(InstructionArray[1]);
+        handleAddInstruction(acc4, value4, "-");
+        break;
+      case "MOV":
+        let var1 = fetchSecondValue(1);
+        let var2 = fetchSecondValue(2);
+        handleMov(var1, var2);
+        break;
+      case "MVI":
+        let var3 = fetchSecondValue(1);
+        let var4 = parseInt(InstructionArray[2]);
+        handleMov(var3, var4);
+        break;
+
+      case "STA":
+        let staAcc = RegisterData[0].value;
+        storeValueIntoMemory(staAcc);
+        break;
+
+      case "SHLD":
+        let shldans = RegisterData[7].value + RegisterData[8].value;
+        storeValueIntoMemory(shldans);
+        break;
+
+      case "LHLD":
+        let var6 = fetchSecondValue(1);
+        setFlagsValue(var6);
+        let lhldans = var6.toString(16);
+
+        const lhldregData = RegisterData;
+        if (lhldans.length === 1 || lhldans.length === 2) {
+          lhldregData[8].value = lhldregData;
+        } else if (lhldans.length === 3) {
+          lhldregData[8].value = `${lhldans[lhldans.length - 2]}${
+            lhldans[lhldans.length - 1]
+          }`;
+          lhldregData[7].value = `${lhldans[0]}`;
+        } else if (lhldans.length === 4) {
+          lhldregData[8].value = `${lhldans[lhldans.length - 2]}${
+            lhldans[lhldans.length - 1]
+          }`;
+          lhldregData[7].value = `${lhldans[0]}${lhldans[1]}`;
+        } else {
+          break;
+        }
+
+        const lhldBlock = block;
+        lhldBlock.forEach((item) => {
+          if (
+            item.id === 4 ||
+            item.id === 7 ||
+            item.id === 8 ||
+            item.id === 9
+          ) {
+            item.opacity = 1;
+          }
+        });
+        setBlock([...lhldBlock]);
+        setRegisterData([...lhldregData]);
+        break;
+      case "LDA":
+        let var5 = fetchSecondValue(1);
+
+        const regData = RegisterData;
+        const blockData = block;
+
+        setFlagsValue(var5);
+        let hexAns = var5.toString(16);
+        if (hexAns.length > 2) {
+          hexAns = `${hexAns[hexAns.length - 2]}${hexAns[hexAns.length - 1]}`;
+        }
+        regData[0].value = hexAns;
+
+        blockData.forEach((item) => {
+          item.opacity = 1;
+        });
+        setBlock([...blockData]);
+        setRegisterData([...regData]);
+        break;
+      default:
+        break;
     }
   };
 

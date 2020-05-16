@@ -30,7 +30,7 @@ const Footer = () => {
           <i className="fa fa-facebook-official fa-3x blue-text"></i>
         </a>
         <a
-          href="https://www.google.com"
+          href="https://www.linkedin.com/in/ferin-patel-ba031b165/"
           target="_blank"
           rel="noopener noreferrer"
         >

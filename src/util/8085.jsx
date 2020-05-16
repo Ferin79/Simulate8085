@@ -4,14 +4,9 @@ import { Context } from "../data/context";
 import style from "./css/Image.module.css";
 
 const SVGImages = () => {
-  const {
-    flags,
-    RegisterData,
-    tempReg,
-    block,
-    pc,
-    animationSpeed,
-  } = useContext(Context);
+  const { flags, RegisterData, block, pc, animationSpeed } = useContext(
+    Context
+  );
   return (
     <React.Fragment>
       <svg
@@ -163,7 +158,7 @@ const SVGImages = () => {
                 <path
                   data-tip={
                     block[2].opacity === 1
-                      ? `<h5>Temporary Register</h5><h6>ALU can store immediate result in temporary register.</h6><p>Value: ${tempReg}</p>`
+                      ? `<h5>Temporary Register</h5><h6>ALU can store immediate result in temporary register.</h6><p>Value: ${block[2].value}</p>`
                       : ""
                   }
                   id="TempRect"
