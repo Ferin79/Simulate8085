@@ -37,6 +37,7 @@ const Footer = () => {
           <i className="fa fa-linkedin-square fa-3x light-blue-text"></i>
         </a>
       </div>
+      <hr className={style.hrLine} />
       <div className={style.person}>
         <p>Jash Jariwala</p>
         <a

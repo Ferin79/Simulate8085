@@ -13,3 +13,25 @@
   justify-content: space-between;
   align-items: center;
 }
+.hrLine {
+  display: none;
+}
+@media (max-width: 900px) {
+  .footerWrapper {
+    height: 20vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .person {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .hrLine {
+    display: block;
+    height: 2px;
+    width: 100%;
+  }
+}

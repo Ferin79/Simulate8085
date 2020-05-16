@@ -289,7 +289,7 @@ const Interact = () => {
           <div className={style.animateWrapper}>
             <p>Animation Speed:</p>
             <Range
-              max="10"
+              max="5"
               min="0.5"
               name="points"
               value={animationSpeed}

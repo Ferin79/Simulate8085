@@ -54,6 +54,7 @@ const VirtualRam = () => {
           )}
         </tbody>
       </Table>
+
       <div className={style.conversionWrapper}>
         <h5>Conversion</h5>
         {deciToHex ? (
@@ -73,7 +74,7 @@ const VirtualRam = () => {
         ) : (
           <input
             placeholder="Enter Hex Number"
-            type="number"
+            type="text"
             name="hex"
             min="0"
             required

@@ -1,0 +1,24 @@
+.headerWrapper {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0af;
+  color: white;
+  padding: 0 50px;
+}
+.headerTitleWrapper {
+  padding-left: 100px;
+}
+.actionWrapper {
+  cursor: pointer;
+}
+@media (max-width: 900px) {
+  .headerWrapper {
+    padding: 0 10px;
+  }
+  .headerTitleWrapper {
+    padding-left: 0;
+  }
+}

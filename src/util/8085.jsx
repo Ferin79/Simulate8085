@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ReactTooltip from "react-tooltip";
 import { Context } from "../data/context";
+import style from "./css/Image.module.css";
 
 const SVGImages = () => {
   const {
@@ -14,6 +15,7 @@ const SVGImages = () => {
   return (
     <React.Fragment>
       <svg
+        className={style.svgWrapper}
         width="950"
         height="850"
         viewBox="0 0 1000 1000"

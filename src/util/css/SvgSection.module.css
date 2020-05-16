@@ -2,25 +2,28 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: flex-start;
   background-color: #edf2f7;
   padding: 20px 50px;
   margin: 20px;
 }
-.SVGImages {
+.SVGImagesWrapper {
   width: 65%;
+}
+.VirtualRamWrapper {
+  height: 100%;
 }
 @media (max-width: 900px) {
   .svgWrapper {
-    flex-direction: row;
+    height: auto;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0px 0px;
     margin: 0px;
   }
-  .SVGImages {
+  .SVGImagesWrapper {
     width: 100%;
   }
 }

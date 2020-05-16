@@ -48,6 +48,9 @@
   .InteractDetails {
     flex-direction: column;
   }
+  .InteractButtons {
+    flex-direction: column;
+  }
   .InteractButtons button {
     margin: 10px 10px !important;
   }
