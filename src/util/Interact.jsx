@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Interact = () => {
   toast.configure();
 
+  let exeInstruction = false;
   const [currentStep, setCurrentStep] = useState(0);
   const [clockText, setClockText] = useState("");
   const {
@@ -38,7 +39,8 @@ const Interact = () => {
 
   const handleExe = () => {
     if (isInstructionValid) {
-      handleNextClock();
+      exeInstruction = true;
+      handleFetchCycle();
     } else {
       toast.error("No Instruction Loaded");
     }
@@ -95,6 +97,10 @@ const Interact = () => {
       });
       setBlock([...data]);
     });
+    if (exeInstruction) {
+      console.log("Decode Called");
+      setTimeout(handleDecodeCycle, 1000);
+    }
   };
   const handleDecodeCycle = () => {
     var opData = block;
@@ -153,6 +159,10 @@ const Interact = () => {
         console.log(error);
         toast.error("Something Went Wrong, please try again");
       }
+      if (exeInstruction) {
+        console.log("Execution Cycle Called");
+        setTimeout(() => handleExecutionCycle(InstructionArray[0]), 1000);
+      }
     }, 500);
   };
   const setFlagsValue = (acc) => {
@@ -203,39 +213,6 @@ const Interact = () => {
     setRawInstruction("");
     setInstructionArray(null);
     toast("Execution Completed");
-  };
-  const handleNextClock = () => {
-    if (isInstructionValid) {
-      window.scrollTo({
-        behavior: "smooth",
-        top: DiagramRef.current.offsetTop,
-      });
-      try {
-        const instructionName = InstructionArray[0];
-
-        if (currentStep === 0) {
-          setCurrentStep(1);
-          setClockText("Fetch");
-          handleFetchCycle();
-        }
-        if (currentStep === 1) {
-          setCurrentStep(2);
-          setClockText("Decode");
-          handleDecodeCycle();
-        }
-        if (currentStep === 2) {
-          setCurrentStep(3);
-          setClockText("Execution");
-          handleExecutionCycle(instructionName);
-          executionComplete();
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error("Error. Please Try again");
-      }
-    } else {
-      toast.error("No Instruction Loaded");
-    }
   };
   const handleMov = (val1, val2) => {
     val1 = val2;
@@ -381,6 +358,41 @@ const Interact = () => {
         break;
       default:
         break;
+    }
+    console.log("In exe handle");
+    exeInstruction = false;
+  };
+  const handleNextClock = () => {
+    if (isInstructionValid) {
+      window.scrollTo({
+        behavior: "smooth",
+        top: DiagramRef.current.offsetTop,
+      });
+      try {
+        const instructionName = InstructionArray[0];
+
+        if (currentStep === 0) {
+          setCurrentStep(1);
+          setClockText("Fetch");
+          handleFetchCycle();
+        }
+        if (currentStep === 1) {
+          setCurrentStep(2);
+          setClockText("Decode");
+          handleDecodeCycle();
+        }
+        if (currentStep === 2) {
+          setCurrentStep(3);
+          setClockText("Execution");
+          handleExecutionCycle(instructionName);
+          executionComplete();
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Error. Please Try again");
+      }
+    } else {
+      toast.error("No Instruction Loaded");
     }
   };
 

@@ -1,3 +1,30 @@
+@media (max-width: 1500px) {
+  .svgWrapper {
+    height: 700px !important;
+    width: 700px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 1200px) {
+  .svgWrapper {
+    height: 600px !important;
+    width: 600px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 1010px) {
+  .svgWrapper {
+    height: 500px !important;
+    width: 500px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
 @media (max-width: 900px) {
   .svgWrapper {
     height: 400px;
