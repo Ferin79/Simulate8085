@@ -1467,6 +1467,22 @@ const SVGImages = () => {
                 d="M423.123 398.967V403.068H421.741V392.593H425.604C426.751 392.593 427.647 392.886 428.295 393.471C428.947 394.056 429.273 394.831 429.273 395.795C429.273 396.811 428.954 397.596 428.317 398.147C427.683 398.694 426.775 398.967 425.59 398.967H423.123ZM423.123 397.838H425.604C426.343 397.838 426.909 397.665 427.302 397.32C427.695 396.97 427.892 396.466 427.892 395.809C427.892 395.186 427.695 394.687 427.302 394.313C426.909 393.939 426.369 393.744 425.684 393.73H423.123V397.838Z"
                 fill="black"
               />
+
+              <rect data-tip={`<h5>${RegisterData[1].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[1].value}</p>`}  x="790px" y="446px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[2].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[2].value}</p>`}  x="790px" y="487px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[3].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[3].value}</p>`}  x="790px" y="528px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[4].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[4].value}</p>`}  x="790px" y="571px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
+              
+              <rect data-tip={`<h5>${RegisterData[5].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[5].value}</p>`}  x="878px" y="446px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[6].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[6].value}</p>`}  x="878px" y="487px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[7].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[7].value}</p>`}  x="878px" y="528px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[8].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[8].value}</p>`}  x="878px" y="571px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
+              
+              <rect data-tip={`<h5>Stack Pointer</h5><p>The stack is a LIFO (last in, first out) data structure implemented in the RAM area and is used to store addresses and data when the microprocessor branches to a subroutine.</p>`}  x="790px" y="614px"  width="175px" height="36px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>Program Counter</h5><p>Value: ${pc}</p>`}  x="790px" y="654px"  width="175px" height="36px"  style={{fill:"red", opacity:0}}/>
+
+
+
             </g>
           </g>
         </g>
