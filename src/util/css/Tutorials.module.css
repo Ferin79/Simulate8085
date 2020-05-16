@@ -1,7 +1,7 @@
-/* body {
+body {
   overflow: hidden;
   pointer-events: none;
-} */
+}
 .tutWrapper {
   height: 80vh;
   width: 50%;
@@ -28,6 +28,7 @@
 .btnNext,
 .prevBtn {
   pointer-events: all !important;
+  background-color: #0af !important;
 }
 .tutText {
   text-align: center;
@@ -37,4 +38,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.ListWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .tutWrapper {
+    width: 95%;
+    height: 95vh;
+  }
+  .tutText {
+    text-align: center;
+    padding: 15px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  h5 {
+    font-size: 20px;
+  }
+  h6 {
+    font-size: 18px;
+  }
+  .imgWrapper img {
+    height: 300px;
+    width: 300px;
+  }
 }

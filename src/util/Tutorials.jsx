@@ -45,10 +45,159 @@ const Tutorial = ({ setShowTutorials }) => {
           </h6>
           <div className={style.imgWrapper}>
             <img
-              src={require("../images/cpu.png")}
+              src={require("../images/cpu2.gif")}
               alt="cpu"
               height={350}
               width={350}
+            />
+          </div>
+        </section>
+      ) : null}
+
+      {screen === 3 ? (
+        <section className={style.section1}>
+          <h3 className={style.tutText}>Modify Register values</h3>
+          <h6 className={style.tutText}>
+            Note: You will enter values in decimal from 0 to 255. Later this
+            values will be converted into hexadecimal values.
+          </h6>
+          <div className={style.imgWrapper}>
+            <img
+              src={require("../images/register.gif")}
+              alt="cpu"
+              height={500}
+              width={500}
+            />
+          </div>
+        </section>
+      ) : null}
+      {screen === 4 ? (
+        <section className={style.section1}>
+          <h3 className={style.tutText}>Modify Address/Memory values</h3>
+          <h6 className={style.tutText}>
+            Note: You will enter values in decimal from 0 to 255. Later this
+            values will be converted into hexadecimal values.
+          </h6>
+          <div className={style.imgWrapper}>
+            <img
+              src={require("../images/memory.gif")}
+              alt="cpu"
+              height={500}
+              width={500}
+            />
+          </div>
+        </section>
+      ) : null}
+
+      {screen === 5 ? (
+        <section className={style.section1}>
+          <h3 className={style.tutText}>Insert Instructions</h3>
+          <h6 className={style.tutText}>
+            Currenlty Supported Instruction are.....(More Instructions are
+            coming soon)
+          </h6>
+          <div className={style.ListWrapper}>
+            <ul>
+              <li>ADD</li>
+              <li>ADI</li>
+              <li>SUB</li>
+              <li>SUI</li>
+            </ul>
+            <ul>
+              <li>MOV</li>
+              <li>MVI</li>
+              <li>LDA</li>
+              <li>STA</li>
+              <li>LHLD</li>
+              <li>SHLD</li>
+            </ul>
+          </div>
+          <h6 className={style.tutText}>
+            Note: You will enter values in decimal from 0 to 255. Later this
+            values will be converted into hexadecimal values.
+          </h6>
+          <div className={style.imgWrapper}>
+            <img
+              src={require("../images/instruction.gif")}
+              alt="cpu"
+              height={110}
+              width={500}
+            />
+          </div>
+        </section>
+      ) : null}
+      {screen === 6 ? (
+        <section className={style.section1}>
+          <h3 className={style.tutText}>Conversion</h3>
+          <h6 className={style.tutText}>
+            You can convert decimal to Hex and Vice Versa
+          </h6>
+
+          <h6 className={style.tutText}>
+            Note: You will enter values in decimal from 0 to 255. Later this
+            values will be converted into hexadecimal values.
+          </h6>
+          <div className={style.imgWrapper}>
+            <img
+              src={require("../images/convert.gif")}
+              alt="cpu"
+              height={400}
+              width={500}
+            />
+          </div>
+        </section>
+      ) : null}
+
+      {screen === 7 ? (
+        <section className={style.section1}>
+          <h3 className={style.tutText}>Visualize 8085</h3>
+          <h6 className={style.tutText}>
+            You can visulize how the instructions executes in 8085 and what
+            different blocks of 8085 changes.
+          </h6>
+          <h6 className={style.tutText}>
+            Note. Hover over 8085 components, show the value of that particular
+            component at that moment.
+          </h6>
+
+          <div className={style.imgWrapper}>
+            <img
+              src={require("../images/visualize.gif")}
+              alt="cpu"
+              height={400}
+              width={500}
+            />
+          </div>
+        </section>
+      ) : null}
+
+      {screen === 8 ? (
+        <section className={style.section1}>
+          <h3 className={style.tutText}>Enjoy!</h3>
+          <h6 className={style.tutText}>
+            I hope you have just as much fun playing around with this
+            visualization tool as I had building it!
+          </h6>
+          <h6 className={style.tutText}>
+            If you want to see the source code for this application, check out
+            my{" "}
+            <a
+              style={{ pointerEvents: "all" }}
+              href="https://www.github.com/ferin79"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+            </a>
+            .
+          </h6>
+
+          <div className={style.imgWrapper}>
+            <img
+              src={require("../images/done.gif")}
+              alt="cpu"
+              height={500}
+              width={500}
             />
           </div>
         </section>
@@ -90,7 +239,23 @@ const Tutorial = ({ setShowTutorials }) => {
               Previous
             </Button>
           ) : null}
-          {screen !== 5 ? (
+          {screen === 8 ? (
+            <Button
+              className={style.btnNext}
+              node="button"
+              style={{
+                marginRight: "5px",
+              }}
+              onClick={() => {
+                document.querySelector("body").style.pointerEvents = "all";
+                document.querySelector("body").style.overflow = "auto";
+                setShowTutorials(false);
+              }}
+              waves="light"
+            >
+              Finished
+            </Button>
+          ) : (
             <Button
               className={style.btnNext}
               node="button"
@@ -99,7 +264,7 @@ const Tutorial = ({ setShowTutorials }) => {
               }}
               waves="light"
               onClick={() => {
-                if (screen === 3) {
+                if (screen === 8) {
                   document.querySelector("body").style.pointerEvents = "all";
                   document.querySelector("body").style.overflow = "auto";
                   setShowTutorials(false);
@@ -110,7 +275,7 @@ const Tutorial = ({ setShowTutorials }) => {
             >
               Next
             </Button>
-          ) : null}
+          )}
         </div>
       </section>
     </div>

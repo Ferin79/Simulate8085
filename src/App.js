@@ -8,7 +8,7 @@ import Footer from "./components/shared/footer";
 import Tutorial from "./util/Tutorials";
 
 const App = () => {
-  const [showTutorials, setShowTutorials] = useState(false);
+  const [showTutorials, setShowTutorials] = useState(true);
   return (
     <ContextProvider>
       <Header />

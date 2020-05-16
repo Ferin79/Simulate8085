@@ -39,6 +39,10 @@ const Interact = () => {
 
   const handleExe = () => {
     if (isInstructionValid) {
+      window.scrollTo({
+        behavior: "smooth",
+        top: DiagramRef.current.offsetTop,
+      });
       exeInstruction = true;
       handleFetchCycle();
     } else {
@@ -359,8 +363,10 @@ const Interact = () => {
       default:
         break;
     }
-    console.log("In exe handle");
-    exeInstruction = false;
+    if (exeInstruction) {
+      exeInstruction = false;
+      executionComplete();
+    }
   };
   const handleNextClock = () => {
     if (isInstructionValid) {

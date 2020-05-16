@@ -194,7 +194,9 @@ const ManipulateInstruction = () => {
           validate
           error="Invalid Instrction"
           value={rawInstruction}
-          onChange={(event) => setRawInstruction(event.target.value)}
+          onChange={(event) =>
+            setRawInstruction(event.target.value.toUpperCase())
+          }
         />
       </div>
       <div className={style.instructionDetails}>

@@ -82,7 +82,7 @@ const VirtualRam = () => {
             validate
             error="Please enter valid hex number"
             onChange={(event) => {
-              setHex(event.target.value);
+              setHex(event.target.value.toUpperCase());
             }}
           />
         )}
