@@ -281,13 +281,34 @@ export const ContextProvider = (props) => {
     { val: "M", code: 86 },
   ];
 
-  const blockMap = {
+  // const blockMap = {
+  //   AD0_AD7: 0,
+  //   Instruction_register: 3,
+  //   Instruction_decoder: 6,
+  //   A8_A15: 10,
+  //   ProgramCounter: 11,
+  //   B: 3,
+  // };
+
+  const blockMap = {            
     AD0_AD7: 0,
+    Accumulator: 1,
+    Temp: 2,
     Instruction_register: 3,
+    AccLatch: 4,
+    FlipFlop: 5,
     Instruction_decoder: 6,
+    ALU: 7,
+    decimal: 8,
+    control: 9,
     A8_A15: 10,
+    Reg_A: 0,Reg_W: 1,Reg_Z: 2,Reg_B: 3, Reg_C: 4, Reg_D: 5, Reg_E: 6, Reg_H: 7, Reg_L: 8,
     ProgramCounter: 11,
-    B: 3,
+    sign_flag: 0,
+    zero_flag: 1,
+    auxiliary_flag: 2,
+    parity_flag: 3,
+    carry_flag: 4,
   };
 
   const [isInstructionValid, setIsInstructionValid] = useState(false);

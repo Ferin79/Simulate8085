@@ -4,7 +4,7 @@ import { Context } from "../data/context";
 import style from "./css/Image.module.css";
 
 const SVGImages = () => {
-  const { flags, RegisterData, block, pc, animationSpeed } = useContext(
+  const { flags, RegisterData, block, pc, animationSpeed, blockMap  } = useContext(
     Context
   );
   return (
@@ -1468,15 +1468,15 @@ const SVGImages = () => {
                 fill="black"
               />
 
-              <rect data-tip={`<h5>${RegisterData[1].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[1].value}</p>`}  x="790px" y="446px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
-              <rect data-tip={`<h5>${RegisterData[2].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[2].value}</p>`}  x="790px" y="487px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
-              <rect data-tip={`<h5>${RegisterData[3].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[3].value}</p>`}  x="790px" y="528px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
-              <rect data-tip={`<h5>${RegisterData[4].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[4].value}</p>`}  x="790px" y="571px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[blockMap.Reg_W].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[blockMap.Reg_W].value}</p>`}  x="790px" y="446px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[blockMap.Reg_B].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[blockMap.Reg_B].value}</p>`}  x="790px" y="487px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[blockMap.Reg_D].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[blockMap.Reg_D].value}</p>`}  x="790px" y="528px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[blockMap.Reg_H].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[blockMap.Reg_H].value}</p>`}  x="790px" y="571px"  width="83px" height="38px"  style={{fill:"red", opacity:0}}/>
               
-              <rect data-tip={`<h5>${RegisterData[5].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[5].value}</p>`}  x="878px" y="446px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
-              <rect data-tip={`<h5>${RegisterData[6].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[6].value}</p>`}  x="878px" y="487px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
-              <rect data-tip={`<h5>${RegisterData[7].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[7].value}</p>`}  x="878px" y="528px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
-              <rect data-tip={`<h5>${RegisterData[8].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[8].value}</p>`}  x="878px" y="571px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[blockMap.Reg_Z].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[blockMap.Reg_Z].value}</p>`}  x="878px" y="446px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[blockMap.Reg_C].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[blockMap.Reg_C].value}</p>`}  x="878px" y="487px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[blockMap.Reg_E].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[blockMap.Reg_E].value}</p>`}  x="878px" y="528px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
+              <rect data-tip={`<h5>${RegisterData[blockMap.Reg_L].name}</h5><p style="text-transform: uppercase;">Value: ${RegisterData[blockMap.Reg_L].value}</p>`}  x="878px" y="571px"  width="85px" height="38px"  style={{fill:"red", opacity:0}}/>
               
               <rect data-tip={`<h5>Stack Pointer</h5><p>The stack is a LIFO (last in, first out) data structure implemented in the RAM area and is used to store addresses and data when the microprocessor branches to a subroutine.</p>`}  x="790px" y="614px"  width="175px" height="36px"  style={{fill:"red", opacity:0}}/>
               <rect data-tip={`<h5>Program Counter</h5><p>Value: ${pc}</p>`}  x="790px" y="654px"  width="175px" height="36px"  style={{fill:"red", opacity:0}}/>
