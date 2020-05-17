@@ -290,6 +290,7 @@ const Interact = () => {
   const handleExecutionCycle = (name) => {
     switch (name) {
       case "ADD":
+      case "ADC":
         let acc = parseInt(RegisterData[0].value, 16);
         let value = fetchSecondValue(1);
         handleAddInstruction(acc, value, "+");
@@ -300,6 +301,7 @@ const Interact = () => {
         handleAddInstruction(acc2, value2, "+");
         break;
       case "SUB":
+      case "SBB":
         let acc3 = parseInt(RegisterData[0].value, 16);
         let value3 = fetchSecondValue(1);
         handleAddInstruction(acc3, value3, "-");
@@ -328,6 +330,33 @@ const Interact = () => {
       case "SHLD":
         let shldans = RegisterData[7].value + RegisterData[8].value;
         storeValueIntoMemory(shldans);
+        break;
+
+      case "INR":
+      case "DCR":
+        let inrValue = fetchSecondValue(1);
+        let inrLoc = InstructionArray[1];
+        if (name === "INR") {
+          inrValue++;
+        }
+        if (name === "DCR") {
+          inrValue--;
+        }
+        setFlagsValue(inrValue);
+        const inrReg = RegisterData;
+        inrReg.forEach((item) => {
+          if (item.acronym === inrLoc) {
+            item.value = inrValue.toString(16);
+          }
+        });
+        const inrBlock = block;
+        inrBlock.forEach((item) => {
+          if (item.id === 1 || item.id === 7 || item.id === 9) {
+            item.opacity = 1;
+          }
+        });
+        setRegisterData([...inrReg]);
+        setBlock([...inrBlock]);
         break;
 
       case "ANA":

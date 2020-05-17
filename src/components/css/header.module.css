@@ -12,7 +12,11 @@
   padding-left: 100px;
 }
 .actionWrapper {
+  width: 25%;
   cursor: pointer;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 @media (max-width: 900px) {
   .headerWrapper {

@@ -160,6 +160,26 @@ export const ContextProvider = (props) => {
       name: "ORI",
       group: "Logical",
     },
+    {
+      id: 18,
+      name: "ADC",
+      group: "Arithmetic",
+    },
+    {
+      id: 19,
+      name: "SBB",
+      group: "Arithmetic",
+    },
+    {
+      id: 20,
+      name: "INR",
+      group: "Arithmetic",
+    },
+    {
+      id: 21,
+      name: "DCR",
+      group: "Arithmetic",
+    },
   ]);
   const [flags, setFlags] = useState([
     {
@@ -281,16 +301,7 @@ export const ContextProvider = (props) => {
     { val: "M", code: 86 },
   ];
 
-  // const blockMap = {
-  //   AD0_AD7: 0,
-  //   Instruction_register: 3,
-  //   Instruction_decoder: 6,
-  //   A8_A15: 10,
-  //   ProgramCounter: 11,
-  //   B: 3,
-  // };
-
-  const blockMap = {            
+  const blockMap = {
     AD0_AD7: 0,
     Accumulator: 1,
     Temp: 2,
@@ -302,7 +313,15 @@ export const ContextProvider = (props) => {
     decimal: 8,
     control: 9,
     A8_A15: 10,
-    Reg_A: 0,Reg_W: 1,Reg_Z: 2,Reg_B: 3, Reg_C: 4, Reg_D: 5, Reg_E: 6, Reg_H: 7, Reg_L: 8,
+    Reg_A: 0,
+    Reg_W: 1,
+    Reg_Z: 2,
+    Reg_B: 3,
+    Reg_C: 4,
+    Reg_D: 5,
+    Reg_E: 6,
+    Reg_H: 7,
+    Reg_L: 8,
     ProgramCounter: 11,
     sign_flag: 0,
     zero_flag: 1,
@@ -320,6 +339,7 @@ export const ContextProvider = (props) => {
   const [animationSpeed, setAnimationSpeed] = useState(0.5);
   const SVGRef = useRef(null);
   const DiagramRef = useRef(null);
+  const [instructionModal, setInstructionModal] = useState(false);
 
   return (
     <Context.Provider
@@ -349,6 +369,8 @@ export const ContextProvider = (props) => {
         opcodeMap,
         blockMap,
         DiagramRef,
+        instructionModal,
+        setInstructionModal,
       }}
     >
       {props.children}

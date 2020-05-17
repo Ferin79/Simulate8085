@@ -17,7 +17,7 @@ const App = () => {
   }, []);
   return (
     <ContextProvider>
-      <Header />
+      <Header showTutorials={setShowTutorials} />
       {showTutorials ? <Tutorial setShowTutorials={setShowTutorials} /> : null}
       <Manipulate />
       <Interact />

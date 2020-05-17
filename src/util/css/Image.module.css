@@ -27,10 +27,11 @@
 }
 @media (max-width: 900px) {
   .svgWrapper {
-    height: 400px;
-    width: 400px;
+    height: 400px !important;
+    width: 400px !important;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
 }
