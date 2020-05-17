@@ -116,15 +116,19 @@ const ManipulateInstruction = () => {
 
       switch (sl[0]) {
         case "ADD":
+        case "SUB":
+        case "CMP":
+        case "ANA":
+        case "ORA":
+        case "XRA":
           isCorrect = handleCheckRegisterAndMemory(sl, 1);
           break;
         case "ADI":
-          isCorrect = validate8bitData(sl, 1);
-          break;
-        case "SUB":
-          isCorrect = handleCheckRegisterAndMemory(sl, 1);
-          break;
         case "SUI":
+        case "CPI":
+        case "ANI":
+        case "ORI":
+        case "XRI":
           isCorrect = validate8bitData(sl, 1);
           break;
         case "MOV":

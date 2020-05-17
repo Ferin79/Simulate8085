@@ -262,6 +262,31 @@ const Interact = () => {
     setBlock([...blockData]);
     setAddressRange([...data]);
   };
+  const handleLogical = (acc, val, op) => {
+    acc = acc.toString(2);
+    val = val.toString(2);
+    if (op === "&") {
+      acc = acc & val;
+    }
+    if (op === "|") {
+      acc = acc | val;
+    }
+    if (op === "^") {
+      acc = acc ^ val;
+    }
+    acc = parseInt(acc, 2);
+    setFlagsValue(acc);
+    const anablock = block;
+    const anaReg = RegisterData;
+    anablock.forEach((item) => {
+      if (item.id === 1 || item.id === 4 || item.id === 7 || item.id === 9) {
+        item.opacity = 1;
+      }
+    });
+    anaReg[0].value = acc.toString(16);
+    setRegisterData([...anaReg]);
+    setBlock([...anablock]);
+  };
   const handleExecutionCycle = (name) => {
     switch (name) {
       case "ADD":
@@ -303,6 +328,84 @@ const Interact = () => {
       case "SHLD":
         let shldans = RegisterData[7].value + RegisterData[8].value;
         storeValueIntoMemory(shldans);
+        break;
+
+      case "ANA":
+      case "ANI":
+      case "ORA":
+      case "ORI":
+      case "XRA":
+      case "XRI":
+        let anaacc = parseInt(RegisterData[0].value, 16);
+        let anavalue = 0;
+        if (name === "ANA" || name === "ORA" || name === "XRA") {
+          anavalue = fetchSecondValue(1);
+        }
+        if (name === "ANI" || name === "ORI" || name === "XRI") {
+          anavalue = parseInt(InstructionArray[1]);
+        }
+        if (name === "ANA" || name === "ANI") {
+          handleLogical(anaacc, anavalue, "&");
+        }
+        if (name === "ORA" || name === "ORI") {
+          handleLogical(anaacc, anavalue, "|");
+        }
+        if (name === "XRA" || name === "XRI") {
+          handleLogical(anaacc, anavalue, "^");
+        }
+        break;
+
+      case "CMP":
+      case "CPI":
+        let cmpacc = parseInt(RegisterData[0].value, 16);
+        let cmpvalue = 0;
+        if (name === "CMP") {
+          cmpvalue = fetchSecondValue(1);
+        }
+        if (name === "CPI") {
+          cmpvalue = parseInt(InstructionArray[1]);
+        }
+
+        const cmpflags = flags;
+        if (cmpvalue === cmpacc) {
+          cmpflags.forEach((item) => {
+            if (item.symbol === "Z") {
+              item.value = 1;
+            } else {
+              item.value = 0;
+            }
+          });
+        } else if (cmpacc < cmpvalue) {
+          cmpflags.forEach((item) => {
+            if (item.symbol === "C") {
+              item.value = 1;
+            } else {
+              item.value = 0;
+            }
+          });
+        } else if (cmpacc > cmpvalue) {
+          cmpflags.forEach((item) => {
+            item.value = 0;
+          });
+        } else {
+          break;
+        }
+        const cmpReg = RegisterData;
+        const cmpBlock = block;
+        cmpBlock.forEach((item) => {
+          if (
+            item.id === 1 ||
+            item.id === 4 ||
+            item.id === 7 ||
+            item.id === 9
+          ) {
+            item.opacity = 1;
+          }
+        });
+        cmpReg[0].value = (cmpacc - cmpvalue).toString(16);
+        setBlock([...cmpBlock]);
+        setRegisterData([...cmpReg]);
+        setFlagsValue([...cmpflags]);
         break;
 
       case "LHLD":
